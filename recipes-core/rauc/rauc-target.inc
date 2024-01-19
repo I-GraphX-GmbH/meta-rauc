@@ -4,7 +4,6 @@ RAUC_KEYRING_URI ??= "file://${RAUC_KEYRING_FILE}"
 RRECOMMENDS:${PN} = "squashfs-tools"
 
 SRC_URI:append = " \
-  file://system.conf \
   ${RAUC_KEYRING_URI} \
   file://rauc-mark-good.service \
   file://rauc-mark-good.init \
@@ -28,7 +27,7 @@ do_install () {
                 bbwarn "Please overwrite example system.conf with a project specific one!"
         fi
         install -d ${D}${sysconfdir}/rauc
-        install -m 0644 ${WORKDIR}/system.conf ${D}${sysconfdir}/rauc/system.conf
+        #install -m 0644 ${WORKDIR}/system.conf ${D}${sysconfdir}/rauc/system.conf
 
         # Warn if CA file was not overwritten
         if ! grep -q "^[^#]" ${WORKDIR}/${RAUC_KEYRING_FILE}; then
